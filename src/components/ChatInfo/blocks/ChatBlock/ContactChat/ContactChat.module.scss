@@ -1,0 +1,124 @@
+@import "../../../../../assets/styles/variables";
+
+.messageBlock {
+  .messageList {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 10px 20px 20px 20px;
+    font-size: 14px;
+    overflow: scroll;
+    
+    li {
+      margin-top: 10px;
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        clip-path: circle(50%);
+      
+          img {
+            width: auto;
+            height: 100%;
+          }
+      }
+  
+      .textBody {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: 10px;
+  
+        .userInfo {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+  
+          .name {
+            margin-bottom: 2px;
+            color: $mainBlueColor;
+            font-weight: bold;
+            cursor: pointer;
+          }
+  
+          .activity {
+            display: flex;
+            padding-top: 5px;
+  
+            .view {
+              margin-right: 3px;
+              font-size: 16px;
+              color: $mainBlueColor;
+            }
+            
+            .time {
+              font-size: 11px;
+            }
+          }
+        }
+  
+        .text {
+          color: #fff;
+          word-break: break-word;
+        }
+      }
+    }
+
+    .noMessagesPlug {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+  }
+
+  .bottomBtn {
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    font-size: 30px;
+
+    i {
+      position: sticky;
+      bottom: 0;
+      transition: .2s;
+
+      &:hover {
+        color: $mainBlueColor;
+      }
+    }
+  }
+}
+
+.inputField {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 50px;
+  border-top: 1px solid $topHeaderBg;
+  
+  span {
+    margin: 0 20px;
+    
+    i {
+      cursor: pointer;
+      font-size: 23px;
+      transition: .2s;
+
+      &:hover {
+        color: $mainBlueColor;
+      }
+    }
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    background-color: inherit;
+    color: #fff;
+
+    &::placeholder {
+      color: $mainGrayColor;
+    }
+  }
+}

@@ -1,0 +1,215 @@
+@import "../../assets/styles/variables";
+
+.authentication {
+  display: flex;
+  color: #0c93e0;
+
+  .banner {
+    min-width: 350px;
+    // height: 100vh; // попробуй заменить на img 
+    height: 600px;
+    background-image: url("../../assets/images/Telegram-banner.jpg");
+    background-size: 100%;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      color: #000;
+    }
+
+    span {
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+
+  .signUp {
+    .inputFields {
+      width: 1220px;
+      height: 400px;
+      // display: flex;
+      overflow-x: hidden;
+    }
+  }
+
+  .signIn, .signUp {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 0 40px;
+    background-color: #e3f8fd;
+    z-index: 9999;
+
+    .inputFields {
+      width: 90%;
+
+      &>div { // firstPhase, secondPhase blocks
+        transition: .2s;
+      }
+
+      .username, .surname, .email, .avatar, .phoneNumber, .password {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        height: 70px;
+
+        span {
+          padding-bottom: 5px;
+          font-weight: bold;
+          font-size: 14px;
+        }
+
+        input {
+          width: 100%;
+          padding: 10px 15px;
+          font-size: 16px;
+          border: 1px solid rgb(156,156,156);
+          border-radius: 5px;
+          outline-color: #000;
+          font-weight: bold;
+          transition: .2s;
+          
+          &::placeholder {
+            color: rgb(104, 104, 104);
+            font-weight: bold;
+          }
+          
+          &:hover {
+            border-color: #0c93e0;
+          }
+        }
+
+        .warningLabel {
+          display: flex;
+          align-items: center;
+          padding: 5px 0;
+          color: rgb(211,17,37);
+          font-size: 12px;
+          font-weight: bold;
+        }
+      }
+
+      .avatar {
+        height: auto;
+
+        label {
+          display: flex;
+          margin: 0 auto;
+          font-weight: bold;
+          cursor: pointer;
+
+          i {
+            margin-right: 5px;
+            font-size: 20px;
+          }
+
+          &:hover {
+            color: #3da5e0;
+          }
+        }
+
+        .optionalLabel {
+          font-size: 12px;
+          cursor: default;
+          border-bottom: 1px dotted;
+        }
+
+        .image {
+          width: 150px;
+          height: 150px;
+          margin: 0 auto;
+          border-radius: 50%;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        input {
+          display: none;
+        }
+      }
+    }
+
+    .logIn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 90%;
+
+      .backField {
+        display: flex;
+        font-weight: bold;
+        font-size: 14px;
+        border-bottom: 1px dashed #0c93e0;
+        cursor: pointer;
+
+        i {
+          font-size: 16px;
+        }
+
+        &:hover {
+          color: #3da5e0;
+        }
+      }
+      
+      button {
+        width: 50%;
+        padding: 10px 0;
+        background-color: #0c93e0;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: .2s;
+
+        &:hover {
+          transform: scale(1.05)
+        }
+      }
+    }
+
+    .signUp {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80%;
+
+      span {
+        padding-bottom: 5px;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 10px 0;
+        width: 100%;
+        border-radius: 25px;
+        border: 1px solid rgb(156,156,156);
+        background-color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: .2s;
+
+        &:hover {
+          color: #fff;
+          background-color: #0c93e0;
+          border-color: #0c93e0;
+        }
+      }
+    }
+  }
+}

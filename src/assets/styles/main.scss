@@ -1,0 +1,29 @@
+@import "./variables";
+
+.main {
+  position: relative;
+  overflow: hidden;
+  resize: both;
+  min-width: 360px;
+  width: 1000px;
+  height: 600px;
+  min-height: 500px;
+  margin: 100px auto;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: $sideMenuBg;
+  color: $mainGrayColor;
+
+  .title {
+    text-align: center;
+    padding: 5px 0;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: $topHeaderBg;
+    color: $mainGrayColor;
+  }
+
+  .main-content {
+    display: flex;
+  }
+}

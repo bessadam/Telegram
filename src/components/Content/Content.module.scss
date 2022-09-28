@@ -1,0 +1,28 @@
+@import "../../assets/styles/variables";
+
+.content {
+  display: flex;
+  transition: .2s;
+  
+  .contentPlug {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-bottom-right-radius: 10px;
+    background-color: $topHeaderBg;
+  
+    p {
+    /*
+      This margin need to vertically center plug text in content block 
+      50px - height of insible mute field in footer component
+      this is a very bad practice
+    */
+      margin-bottom: 50px; // bad idea!
+      padding: 5px 10px;
+      border-radius: 20px;
+      background-color: $sideMenuBg;
+      color: $mainGrayColor;
+    }
+  }
+}

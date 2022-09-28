@@ -1,0 +1,63 @@
+.contacts {
+  width: 100%;
+  color: #d4d6e6;
+  
+  .addBtn {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    color: #45a4f3;
+
+    i {
+      margin: 0 20px 0 10px;
+      font-size: 25px;
+    }
+
+    p {
+      cursor: pointer;
+    }
+  }
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  cursor: default;
+  transition: .1s;
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    clip-path: circle(50%);
+
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  .info {
+    width: 100%;
+    padding: 10px 0; 
+    margin-left: 10px;
+    border-top: 1px solid #242F3F;
+
+    .name {
+      width: 70%;
+      margin-right: 5px;
+      height: 17px;
+      text-overflow: ellipsis;
+      overflow: hidden; 
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .status {
+      font-size: 12px;
+    }
+  }
+}

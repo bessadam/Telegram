@@ -1,0 +1,92 @@
+@import "../../assets/styles/variables.scss";
+
+.modalWindow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 330px;
+  border-radius: 10px;
+  font-size: 14px;
+  box-shadow: 4px 4px 8px 0px rgba(56, 84, 105, 0.2);
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid $topHeaderBg;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: .2s;
+    background-color: $sideMenuBg;
+    
+    .closeBtn {
+      position: absolute;
+      left: 20px;
+      font-size: 20px;
+      color: $mainBlueColor;
+      cursor: pointer;
+    }
+
+    .title {
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+
+  .dataFields {
+    background-color: $ultraBlackColorSetting;
+
+    .container {
+      padding: 30px;
+
+      .username, .lastname {
+        background-color: $sideMenuBg;
+
+        input {
+          width: 100%;
+          padding: 0 10px;
+          margin: 10px 0;
+          background-color: inherit;
+          border: none;
+          color: #fff;
+
+          &::placeholder {
+            color: $mainGrayColor;
+          }
+
+        }
+      }
+
+      .username {
+        border-bottom: 1px solid $topHeaderBg;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .lastname {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+
+      .errorLabel {
+        padding: 5px 0 0 10px;
+        color: $mainRedColor;
+      }
+    }
+  }
+
+  .acceptBtn {
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid $topHeaderBg;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: $mainBlueColor;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: $sideMenuBg;
+    transition: .2s;
+  }
+}

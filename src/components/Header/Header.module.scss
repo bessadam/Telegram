@@ -1,0 +1,10 @@
+@import "../../assets/styles/variables";
+
+.header {
+  text-align: center;
+  padding: 5px 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: $topHeaderBg;
+  color: $mainGrayColor;
+}

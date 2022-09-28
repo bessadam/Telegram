@@ -1,0 +1,102 @@
+@import "../../assets/styles/variables";
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  transition: .2s;
+
+  .controlPanel {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+    min-width: 300px;
+    padding: 10px 0;
+    border-top: 1px solid $borderColor;
+    border-right: 1px solid $borderColor;
+    font-size: 23px;
+    background-color: $sideMenuBg;
+    color: #d4d6e6;
+    
+    i {
+      cursor: pointer;
+    }
+  }
+  
+  .chatField {
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    padding: 15px 0;
+    border-top: 1px solid $borderColor;
+    background-color: $sideMenuBg;
+    color: $mainBlueColor;
+    cursor: pointer;
+  }
+
+  .container {
+    width: 80vw;
+    margin: 30px auto;
+  }
+
+  .list {
+    list-style: none;
+    background: orange;
+    padding: 10px 30px;
+  }
+
+  .item {
+    background: red;
+    color: white;;
+    box-shadow: 0 2px 4px #999;
+    padding: 10px 30px;
+    margin: 10px 0;
+  }
+
+  .button {
+    border: none;
+    outline: none;
+    background: purple;
+    color: white;
+    padding: 10px 30px;
+  }
+
+  .button:hover {
+    background: orange;
+  }
+
+  h3 {
+    margin: 15px 0;
+  }
+
+  .inputField {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 52.5px;
+    border-top: 1px solid $topHeaderBg;
+
+    span {
+      margin: 0 20px;
+      
+      i {
+        cursor: pointer;
+        font-size: 23px;
+      }
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      background-color: inherit;
+      color: #fff;
+
+      &::placeholder {
+        color: $mainGrayColor;
+      }
+    }
+  }
+}

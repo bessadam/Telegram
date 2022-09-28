@@ -1,0 +1,91 @@
+@import "../../../assets/styles/variables";
+
+.channels {
+  .channel {
+    display: flex;
+    width: 100%;
+    padding: 10px 0 0 10px;
+    color: #d4d6e6;
+    font-size: 14px;
+    cursor: default;
+    transition: 0.1s;
+  
+    .avatar {
+      width: 50px;
+      height: 50px;
+      clip-path: circle(50%);
+  
+      img {
+        width: auto;
+        height: 100%;
+      }
+    }
+  
+    .content {
+      width: 100%;
+      margin-left: 10px;
+      padding: 0 10px 10px 0;
+      border-bottom: 1px solid $topHeaderBg;
+  
+      .header {
+        position: relative;
+        display: flex;
+        align-items: center;
+    
+        .title {
+          display: flex;
+          align-items: center;
+    
+          h4 {
+            margin-right: 5px;
+            height: 17px;
+            text-overflow: ellipsis;
+            overflow: hidden; 
+            white-space: nowrap;
+            color: white;
+          }
+  
+          i {
+            font-size: 12px;
+            margin-top: 4px;
+          }
+        }
+
+        .activity {
+          display: flex;
+          position: absolute;
+          right: 0;
+
+          i {
+            margin-right: 3px;
+            color: $mainBlueColor;
+            font-size: 16px;
+          }
+
+          .time {
+            font-size: 12px;
+          }
+        }
+      }
+  
+      .info {
+        width: 100%;
+  
+        .text {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          height: 35px;
+          overflow: hidden;
+          word-break: break-word;
+        }
+      }
+    }
+
+    &:last-child {
+      .content {
+        border-bottom: 1px solid rgba(0, 0, 0, 0);
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+@import "../../assets/styles/variables";
+
+.searchField {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 12px 10px;
+  background-color: $sideMenuBg;
+  z-index: 9999;
+}
+
+.searchInput {
+  width: 100%;
+  position: relative;
+  padding: 5px 0;
+
+  input {
+    width: 100%;
+    position: relative;
+    padding: 5px 0;
+    // padding-left: 90px;
+    border: none;
+    border-radius: 5px;
+    background-color: $topHeaderBg;
+    color: white;
+    transition: .3s;
+    cursor: default;
+  
+    &::placeholder {
+      color: $mainGrayColor;
+    }
+  }
+  
+  .searchIcon {
+    position: absolute;
+    padding: 5px 0;
+    left: 0;
+    color: $mainGrayColor;
+    transition: .3s;
+  }
+  
+  .clearIcon {
+    opacity: 0;
+    position: absolute;
+    padding: 5px 0;
+    padding-right: 10px;
+    color: $mainGrayColor;
+    transition: .2s;
+    cursor: pointer;
+  
+    &:hover {
+      color: $mainBlueColor;
+    }
+  }
+}
+
+.searchOutput {
+  display: flex;
+  flex-direction: column;
+
+  .chats, .global {
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 10px;
+      background-color: $topHeaderBg;
+      font-size: 12px;
+
+      .title {
+        text-transform: uppercase;
+      }
+
+      .showBtn {
+        cursor: pointer;
+        transition: .1s;
+
+        &:hover {
+          color: $mainBlueColor;
+        }
+      }
+    }
+
+    ul {
+      li {
+        display: flex;
+        align-items: center;
+        padding: 10px 0 0 10px;
+        cursor: default;
+        
+        .avatar {
+          width: 40px;
+          height: 40px;
+          clip-path: circle(50%);
+        
+          img {
+            width: auto;
+            height: 100%;
+          }
+        }
+        
+        .info {
+          width: 100%;
+          margin-left: 10px;
+          border-bottom: 1px solid $topHeaderBg;
+          font-size: 13px;
+
+          .name {
+            color: #fff;
+            font-weight: bold;
+          }
+
+          .link {
+            padding-top: 5px;
+          }
+        }
+
+        &:last-child {
+          .info {
+            border-bottom: 1px solid rgba(0, 0, 0, 0);
+          }
+        }
+      }
+    }
+  }
+
+  .notFound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 460px;
+    font-size: 120px;
+  }
+}
+
