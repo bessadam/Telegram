@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
+# Some info
+Hello! This is an introductory message for working with this application. As you may have noticed, it is very similar to Telegram (macOS, version 8.0 and newer). I want to note right away that this application is in no way commercial and was created solely for the purpose of practicing the React.js library, Typescript, Redux and other front-end technologies.
+
 ## Available Scripts
 
 In the project directory, you can run:
