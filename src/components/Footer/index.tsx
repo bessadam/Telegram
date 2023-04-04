@@ -38,14 +38,14 @@ const Footer: React.FC = () => {
   */
 
   const setMenuGroup = (id: number) => {
-    if(channelsStatus==="resolved" && contactsStatus==="resolved") {
+    if(channelsStatus === "resolved" && contactsStatus === "resolved") {
       dispatch(setSideMenu({id})); 
       settingsIsActive 
         && id!==4 
         && dispatch(setSettingsActive({isActive: false, id: 0})); // Need to disable Settings to not show Settings content in Chats component
-      id===1 && dispatch(setContactsSearchActive({active: false})) && dispatch(setContactsSearchValue({searchValue: ""})); // Disable and clear Search from Contacts
-      id===3 && dispatch(setChatsSearchActive({active: false})) && dispatch(setChatsSearchValue({searchValue: ""})); // Disable and clear Search from SideMenu
-      id===4 && dispatch(setSettingsActive({isActive: true, id: 1})); // Switch control group to Settings component
+      id === 1 && dispatch(setContactsSearchActive({active: false})) && dispatch(setContactsSearchValue({searchValue: ""})); // Disable and clear Search from Contacts
+      id === 3 && dispatch(setChatsSearchActive({active: false})) && dispatch(setChatsSearchValue({searchValue: ""})); // Disable and clear Search from SideMenu
+      id === 4 && dispatch(setSettingsActive({isActive: true, id: 1})); // Switch control group to Settings component
     }
   }
   
@@ -63,8 +63,7 @@ const Footer: React.FC = () => {
       if(Object.keys(currentChannel).length === 0 && !activeContactChat.id) {
         return group;
       }
-    }
-    else {
+    } else {
       return group;
     }
   }
@@ -102,20 +101,22 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <div className={styles.footer} style={{opacity: modalWindowIsActive ? ".2" : ""}}>
-      {controlGroupField(<div className={styles.controlPanel} style={{width: mainDivWidth < 600 ? "100%" : "unset", maxWidth: mainDivWidth < 600 ? "unset" : ""}}>
-        {controlGroup.map((item) => {
-          return <i 
-            key={item.id} 
-            onClick={() => setMenuGroup(item.id)} 
-            style={{color: currentSideMenuCategory && currentSideMenuCategory.id === item.id ? "#45a4f3" : ""}}
-            >
-              <item.icon/>
-            </i>
-        })}
-      </div>)}
-      {!settingsIsActive && !chatInfoIsActive && chatField()}
-    </div>
+    <>
+      {settingsIsActive && mainDivWidth < 600 ? "" : <div className={styles.footer} style={{opacity: modalWindowIsActive ? ".2" : ""}}>
+        {controlGroupField(<div className={styles.controlPanel} style={{width: mainDivWidth < 600 ? "100%" : "unset", maxWidth: mainDivWidth < 600 ? "unset" : ""}}>
+          {controlGroup.map((item) => {
+            return <i 
+              key={item.id} 
+              onClick={() => setMenuGroup(item.id)} 
+              style={{color: currentSideMenuCategory && currentSideMenuCategory.id === item.id ? "#45a4f3" : ""}}
+              >
+                <item.icon/>
+              </i>
+          })}
+        </div>)}
+        {!settingsIsActive && !chatInfoIsActive && chatField()}
+      </div>}
+    </>
   );
 };
 

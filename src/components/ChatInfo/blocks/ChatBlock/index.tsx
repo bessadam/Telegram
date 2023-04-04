@@ -161,17 +161,13 @@ const ChatBlock: React.FC<ChatBlockI> = ({choosedChat, currentChat, searchAnimat
     
     setTimeout(() => {
       dispatch(setSideMenuActive({active: true}));
-    }, 100)
+    }, 100);
 
     setTimeout(() => {
       !!currentChannel?.id ? dispatch(setChannelEmpty({})) : dispatch(setContactChatEmpty({}));
-    }, 200)
+    }, 200);
   }
 
-  React.useEffect(() => {
-
-  }, [currentChannel]);
-  
   return (
     <div 
       className={styles.chatInfo} 

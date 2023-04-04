@@ -42,7 +42,7 @@ const SearchInput: React.FC<SearchInputI> = ({ searchFrom }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if(searchFrom==="ChatInfo" && channelInfoSearchIsActive) {
+    if(searchFrom === "ChatInfo" && channelInfoSearchIsActive) {
       inputRef.current && inputRef.current.focus();
     }
   }, [searchFrom, channelInfoSearchIsActive]);
@@ -51,17 +51,17 @@ const SearchInput: React.FC<SearchInputI> = ({ searchFrom }) => {
    * Setting up local logic of input activity
    */
   React.useEffect(() => {
-    if(searchFrom==="Chats") {
+    if(searchFrom === "Chats") {
       searchIsActive && setSearchIsActive(false);
       chatsSearchIsActive && setSearchIsActive(true);
     }
 
-    if(searchFrom==="Contacts") {
+    if(searchFrom === "Contacts") {
       searchIsActive && setSearchIsActive(false);
       contactsSearchIsActive && setSearchIsActive(true);
     }
     
-    if(searchFrom==="ChatInfo") {
+    if(searchFrom === "ChatInfo") {
       searchIsActive && setSearchIsActive(false);
       channelInfoSearchIsActive && setSearchIsActive(true);
     }
@@ -71,25 +71,27 @@ const SearchInput: React.FC<SearchInputI> = ({ searchFrom }) => {
    * Setting up local logic of input value
    */
   React.useEffect(() => {
-    if(searchFrom==="Chats") {
+    if(searchFrom === "Chats") {
       setInputValue(chatsSearchValue);
     }
 
-    if(searchFrom==="Contacts") {
+    if(searchFrom === "Contacts") {
       setInputValue(contactsSearchValue);
     }
     
-    if(searchFrom==="ChatInfo") {
+    if(searchFrom === "ChatInfo") {
       setInputValue(channelInfoSearchValue);
     }
   }, [searchFrom, chatsSearchValue, contactsSearchValue, channelInfoSearchValue]);
 
+  
   React.useEffect(() => {
-    if(searchFrom!=="ChatInfo") {
+    if(searchFrom !== "ChatInfo") {
       const handleClickOutside = (e: any) => {
-        if(!inputValue.trim().length && !e.path.includes(searchInputRef.current)) {
-          searchFrom==="Chats" && dispatch(setChatsSearchActive({active: false}));
-          searchFrom==="Contacts" && dispatch(setContactsSearchActive({active: false}));
+        const path = e.composedPath ? e.composedPath() : e.path;
+        if(!inputValue.trim().length && !path.includes(searchInputRef.current)) {
+          searchFrom === "Chats" && dispatch(setChatsSearchActive({active: false}));
+          searchFrom === "Contacts" && dispatch(setContactsSearchActive({active: false}));
         }
       };
       document.addEventListener("click", handleClickOutside);
@@ -101,46 +103,46 @@ const SearchInput: React.FC<SearchInputI> = ({ searchFrom }) => {
   }, [inputValue, searchFrom]);
 
   const handleSearch = (active: boolean) => {
-    if(searchFrom==="Chats") {
+    if(searchFrom === "Chats") {
       dispatch(setChatsSearchActive({active}));
       inputRef.current && inputRef.current.focus();
     }
 
-    if(searchFrom==="Contacts") {
+    if(searchFrom ===  "Contacts") {
       dispatch(setContactsSearchActive({active}));
       inputRef.current && inputRef.current.focus();
     }
 
-    if(searchFrom==="ChatInfo") {
+    if(searchFrom ==="ChatInfo") {
       dispatch(setChannelInfoSearchActive({active}));
       inputRef.current && inputRef.current.focus();
     }
   }
 
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(searchFrom==="Chats") {
+    if(searchFrom === "Chats") {
       dispatch(setChatsSearchValue({searchValue: e.target.value}));
     }
 
-    if(searchFrom==="Contacts") {
+    if(searchFrom === "Contacts") {
       dispatch(setContactsSearchValue({searchValue: e.target.value}));
     }
 
-    if(searchFrom==="ChatInfo") {
+    if(searchFrom === "ChatInfo") {
       dispatch(setChannelInfoSearchValue({searchValue: e.target.value}));
     }
   }
 
   const clearSearch = () => { 
-    if(searchFrom==="Chats") {
+    if(searchFrom === "Chats") {
       dispatch(setChatsSearchValue({searchValue: ""}));
     }
 
-    if(searchFrom==="Contacts") {
+    if(searchFrom === "Contacts") {
       dispatch(setContactsSearchValue({searchValue: ""}));
     }
 
-    if(searchFrom==="ChatInfo") {
+    if(searchFrom === "ChatInfo") {
       dispatch(setChannelInfoSearchValue({searchValue: ""}));
     }
   }

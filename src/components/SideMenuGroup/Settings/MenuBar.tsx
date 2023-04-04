@@ -21,14 +21,18 @@ const MenuBar: React.FC = () => {
   }
 
   const handleUserSettings = () => {
-    dispatch(setSettingsActive({isActive: true, id: 0}));
+    dispatch(setSettingsActive({isActive: true, id: null}));
   }
 
   return (
     <div className={styles.menuBar}>
       <SearchField searchFrom="Settings" />
       <div className={styles.content}>
-        <div className={styles.userContainer} onClick={handleUserSettings} style={{backgroundColor: activeCategoryId===0 ? "#55A4F9" : ""}}>
+        <div 
+          className={styles.userContainer} 
+          onClick={handleUserSettings} 
+          style={{backgroundColor: activeCategoryId === null ? "#55A4F9" : ""}}
+        >
           <div className={styles.user}>
             <div className={styles.profile}>
               <div className={styles.avatar}>
@@ -52,8 +56,23 @@ const MenuBar: React.FC = () => {
         <div className={styles.categories}>
           <ul>
             {settings.map((category, key) => {
-              return <li key={key} onClick={() => setActiveSettingCategory(category.id)} style={{backgroundColor: activeCategoryId===category.id ? "#45a4f3" : "", color: activeCategoryId===category.id ? "white" : ""}}>
-                <i className={styles.categoryIcon} style={{backgroundColor: activeCategoryId===category.id ? "white" : category.bgColor, color: activeCategoryId===category.id ? "#1B222C" : ""}}><category.icon/></i>
+              return <li 
+                key={key} 
+                onClick={() => setActiveSettingCategory(category.id)} 
+                style={{
+                  backgroundColor: activeCategoryId === category.id ? "#45a4f3" : "", 
+                  color: activeCategoryId === category.id ? "white" : ""
+                }}
+              >
+                <i 
+                  className={styles.categoryIcon} 
+                  style={{
+                    backgroundColor: activeCategoryId===category.id ? "white" : category.bgColor, 
+                    color: activeCategoryId === category.id ? "#1B222C" : ""
+                  }}
+                >
+                    <category.icon/>
+                  </i>
                 <p>{category.name}</p>
                 {activeCategoryId !== category.id && <i className={styles.arrow}><MdOutlineKeyboardArrowRight/></i>}
               </li>

@@ -15,7 +15,7 @@ import { fetchContacts } from "../../redux/slices/activeContacts";
 import debounce from "lodash.debounce";
 
 interface ContentI {
-  mainDivRef: any // div ref
+  mainDivRef: any; // div ref
 }
 
 const Content: React.FC<ContentI> = ({ mainDivRef }) => {
@@ -47,30 +47,31 @@ const Content: React.FC<ContentI> = ({ mainDivRef }) => {
     return function cleanup() {
       resizeObserver.disconnect();
     }
-  })
+  });
+
+  /* 
+    Debounce func for resize optimization 
+    delay 50ms is optional
+  */
+    const updateBlockWidth = React.useCallback(
+      debounce((width, height) => {
+        dispatch(setResizedWidth({value: width}));
+        dispatch(setResizedHeight({value: height}));
+      }, 50),
+      []
+    );
 
   const handleElementResized = () => {
     if(mainDivRef.current) {
       if(mainDivRef.current.offsetWidth) {
         // dispatch(setResizedWidth({value: mainDivRef.current.offsetWidth}));
         // dispatch(setResizedHeight({value: mainDivRef.current.offsetHeight}));
-        updateBlockWidth(mainDivRef.current.offsetWidth, mainDivRef.current.offsetHeight)
+        updateBlockWidth(mainDivRef.current.offsetWidth, mainDivRef.current.offsetHeight);
       }
     }
   }
 
   const resizeObserver = new ResizeObserver(handleElementResized);
-  /* 
-    Debounce func for resize optimization 
-    delay 50ms is optional
-  */
-  const updateBlockWidth = React.useCallback(
-    debounce((width, height) => {
-      dispatch(setResizedWidth({value: width}));
-      dispatch(setResizedHeight({value: height}));
-    }, 50),
-    []
-  );
 
   const sideMenu = () => {
     if(blockWidth < 600) {
@@ -78,15 +79,13 @@ const Content: React.FC<ContentI> = ({ mainDivRef }) => {
         if(settingsIsActive) {
           return
         } else {
-          return <SideMenu />
+          return <SideMenu />;
         }
-      }
-      if(Object.keys(currentChat).length !== 0) {
+      } else {
         return 
       }
-    }
-    if(blockWidth > 600) {
-      return <SideMenu />
+    } else {
+      return <SideMenu />;
     }
   }
 
@@ -94,17 +93,14 @@ const Content: React.FC<ContentI> = ({ mainDivRef }) => {
     if(blockWidth < 600) {
       if(Object.keys(currentChat).length === 0) {
         return
+      } else {
+        return component;
       }
-      if(Object.keys(currentChat).length !== 0) {
-        return component
-      }
-    }
-    if(blockWidth > 600) {
+    } else {
       if(Object.keys(currentChat).length === 0) {
-        return <div className={styles.contentPlug} style={{height: blockHeight - 25}}><p>Select a chat to start messaging</p></div>
-      }
-      if(Object.keys(currentChat).length !== 0) {
-        return component
+        return <div className={styles.contentPlug} style={{height: blockHeight - 25}}><p>Select a chat to start messaging</p></div>;
+      } else {
+        return component;
       }
     }
   }

@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { removeUserChannel, setChannelEmpty, setChannelMuted, setChatInfoActive } from "../../redux/slices/activeChats";
 import { clearContactChatHistory, deleteUserContactChat, setContactChatEmpty } from '../../redux/slices/activeContacts';
+import { setSideMenuActive } from '../../redux/slices/switchSideMenu';
 
 interface DropMenuInterface {
   dropMenuItems: DropItemInterface[];
@@ -24,7 +25,8 @@ const DropMenu: React.FC<DropMenuInterface> = ({ menuIcon, dropMenuItems }) => {
 
   React.useEffect(() => {
     const handleClickOutside = (e: any) => {
-      if (!e.path.includes(dropMenuRef.current)) {
+      const path = e.composedPath ? e.composedPath() : e.path;
+      if (!path.includes(dropMenuRef.current)) {
         setDropMenuIsActive(false);
       }
     };
@@ -37,12 +39,45 @@ const DropMenu: React.FC<DropMenuInterface> = ({ menuIcon, dropMenuItems }) => {
 
   const showDropMenu = (name?: string) => {
     setDropMenuIsActive(prev => !prev);
-    name === "Info" && dispatch(setChatInfoActive({active: true}));
-    name === "Mute" && dispatch(setChannelMuted({active: true}));
-    name === "Unmute" && dispatch(setChannelMuted({active: false}));
-    name === "Clear Chat History" && dispatch(clearContactChatHistory({id: activeContactChat.id}));
-    name === "Delete Chat" && dispatch(deleteUserContactChat({id: activeContactChat.id})) && dispatch(setContactChatEmpty({}));
-    name === "Leave Channel" && dispatch(removeUserChannel({id: currentChannel?.id})) && dispatch(setChannelEmpty({}));
+    switch(name) {
+      case "Info": 
+        dispatch(setChatInfoActive({active: true}));
+        break;
+
+      case "Mute": 
+        dispatch(setChannelMuted({active: true}));
+        break;
+
+      case "Unmute": 
+        dispatch(setChannelMuted({active: false}));
+        break;
+
+      case "Clear Chat History": 
+        dispatch(clearContactChatHistory({id: activeContactChat.id}));
+        break;
+
+      case "Delete Chat": 
+        dispatch(deleteUserContactChat({id: activeContactChat.id}))
+        setTimeout(() => {
+          dispatch(setSideMenuActive({active: true}));
+        }, 100);
+    
+        setTimeout(() => {
+          !!currentChannel?.id ? dispatch(setChannelEmpty({})) : dispatch(setContactChatEmpty({}));
+        }, 200);
+        break;
+        
+      case "Leave Channel": 
+        dispatch(removeUserChannel({id: currentChannel?.id}));
+        setTimeout(() => {
+          dispatch(setSideMenuActive({active: true}));
+        }, 100);
+    
+        setTimeout(() => {
+          !!currentChannel?.id ? dispatch(setChannelEmpty({})) : dispatch(setContactChatEmpty({}));
+        }, 200);
+        break;
+    }
   }
 
   const delayedCloseMenu = () => {
@@ -53,7 +88,16 @@ const DropMenu: React.FC<DropMenuInterface> = ({ menuIcon, dropMenuItems }) => {
 
   return (
     <div className={styles.dragField} ref={dropMenuRef}>
-      <i className={styles.dragBtn} onClick={() => showDropMenu()} style={{backgroundColor: dropMenuIsActive ? "rgb(65, 155, 228)" : "", color: dropMenuIsActive ? "white" : ""}}>{menuIcon}</i>
+      <i 
+        className={styles.dragBtn} 
+        onClick={() => showDropMenu()} 
+        style={{
+          backgroundColor: dropMenuIsActive ? "rgb(65, 155, 228)" : "", 
+          color: dropMenuIsActive ? "white" : "",
+        }}
+      >
+        {menuIcon}
+      </i>
       <ul className={styles.dropMenu} onMouseLeave={delayedCloseMenu} style={{display: dropMenuIsActive ? "block" : "none"}}>
         {dropMenuItems.map((item, key) => {
           return <li key={key} onClick={() => showDropMenu(item.name)}>

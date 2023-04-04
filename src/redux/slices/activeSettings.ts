@@ -21,7 +21,7 @@ const activeSettings = createSlice({
     setSettingsActive(state, action) {
       state.id = action.payload.id;
       state.isActive = action.payload.isActive;
-      state.currentSettings = settings.find(item => item.id===action.payload.id);
+      state.currentSettings = settings.find(item => item.id === action.payload.id);
     },
   }
 })

@@ -6,7 +6,7 @@ interface ResizeI {
 }
 
 const initialState: ResizeI = {
-  width: 900,
+  width: 1000,
   height: 525,
 }
 
