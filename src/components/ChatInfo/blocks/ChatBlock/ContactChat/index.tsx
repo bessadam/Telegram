@@ -22,7 +22,7 @@ interface ContactChatI {
   blockHeight: number;
 }
 
-const ContactChat: React.FC<ContactChatI> = ({name, blockHeight}) => {
+const ContactChat: React.FC<ContactChatI> = React.memo(({name, blockHeight}) => {
   const [messageValue, setMessageValue] = React.useState<string>("");
   const [listScrollPosition, setListScrollPosition] = React.useState<number>(0);
   const [chats, setChats] = React.useState<ContactChatInterface[]>([]);
@@ -177,7 +177,7 @@ const ContactChat: React.FC<ContactChatI> = ({name, blockHeight}) => {
       </div>
     </div>
   )
-}
+});
 
 export default ContactChat;
 

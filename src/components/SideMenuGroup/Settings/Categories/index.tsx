@@ -21,8 +21,6 @@ const Categories: React.FC = () => {
     dispatch(setSettingsActive({isActive: false, id: 0}));
   }
 
-  const doneProfileChanges = () => {}
-
   return (
     <div className={styles.settingCategories}>
       <div className={styles.header}>
@@ -31,14 +29,14 @@ const Categories: React.FC = () => {
           <p onClick={closeSettings}>Back</p>
         </div>
         <div className={styles.title}>
-          <p>{activeCategoryId !== 0 ? currentSettings.name : "Edit Profile"}</p>
+          <p>{activeCategoryId !== null ? currentSettings.name : "Edit Profile"}</p>
         </div>
-        {activeCategoryId === 0 && <div className={styles.doneBtn}>
-          <p onClick={doneProfileChanges}>Done</p>
+        {activeCategoryId === null && <div className={styles.doneBtn}>
+          <p>Done</p>
         </div>}
       </div>
       <div className={styles.categories} style={{height: mainDivHeight - 86}}>
-        {activeCategoryId === 0 ? <UserCategories/> : <TelegramCategories/>}
+        {activeCategoryId === null ? <UserCategories/> : <TelegramCategories/>}
       </div>
     </div>
   )

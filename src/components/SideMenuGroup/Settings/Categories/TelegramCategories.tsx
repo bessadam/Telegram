@@ -16,7 +16,6 @@ const TelegramCategories: React.FC = () => {
             {category.categoryItems.map((item: any) => {
               return <li key={item.id}>
                 <p>{item.title}</p>
-                {/* <input type={item.type} /> */}
               </li>
             })}
           </ul>

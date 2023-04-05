@@ -14,7 +14,7 @@ interface DropMenuInterface {
   menuIcon: any;
 }
 
-const DropMenu: React.FC<DropMenuInterface> = ({ menuIcon, dropMenuItems }) => {
+const DropMenu: React.FC<DropMenuInterface> = React.memo(({ menuIcon, dropMenuItems }) => {
   const [dropMenuIsActive, setDropMenuIsActive] = React.useState<boolean>(false);
   const dropMenuRef = React.useRef<HTMLDivElement>(null);
 
@@ -83,7 +83,7 @@ const DropMenu: React.FC<DropMenuInterface> = ({ menuIcon, dropMenuItems }) => {
   const delayedCloseMenu = () => {
     dropMenuIsActive && setTimeout(() => {
       setDropMenuIsActive(false);
-    }, 500)
+    }, 500);
   }
 
   return (
@@ -108,6 +108,6 @@ const DropMenu: React.FC<DropMenuInterface> = ({ menuIcon, dropMenuItems }) => {
       </ul>
     </div>
   )
-}
+});
 
-export default DropMenu
+export default DropMenu;

@@ -18,18 +18,22 @@ interface ContentI {
   mainDivRef: any; // div ref
 }
 
-const Content: React.FC<ContentI> = ({ mainDivRef }) => {
+const Content: React.FC<ContentI> = React.memo(({ mainDivRef }) => {
   const [currentChat, setCurrentChat] = React.useState<any>(""); // interfaces <ContactsInterface | ChannelInterface>
 
   const modalWindowIsActive = useSelector((state: RootState) => state.activeModalWindow.isActive);
   const currentChannel = useSelector((state: RootState) => state.activeChats.currentChannel);
   const currentContact = useSelector((state: RootState) => state.activeContacts.activeContactChat);
   const settingsIsActive = useSelector((state: RootState) => state.activeSettings.isActive);
+  const settingsCategoryId = useSelector((state: RootState) => state.activeSettings.id);
 
   const blockWidth = useSelector((state: RootState) => state.handleResize.width);
   const blockHeight = useSelector((state: RootState) => state.handleResize.height);
 
   const dispatch = useDispatch<AppDispatch>();
+
+  const contentPlugBanner = <div className={styles.contentPlug} style={{height: blockHeight - 25}}><p>Select a chat to start messaging</p></div>;
+
 
   React.useEffect(() => {
     !!currentChannel?.id ? setCurrentChat(currentChannel) : setCurrentChat(currentContact);
@@ -76,13 +80,13 @@ const Content: React.FC<ContentI> = ({ mainDivRef }) => {
   const sideMenu = () => {
     if(blockWidth < 600) {
       if(Object.keys(currentChat).length === 0) {
-        if(settingsIsActive) {
-          return
+        if(settingsIsActive && settingsCategoryId !== 0) {
+          return;
         } else {
           return <SideMenu />;
         }
       } else {
-        return 
+        return;
       }
     } else {
       return <SideMenu />;
@@ -91,16 +95,21 @@ const Content: React.FC<ContentI> = ({ mainDivRef }) => {
 
   const channelContent = (component: any) => {
     if(blockWidth < 600) {
-      if(Object.keys(currentChat).length === 0) {
-        return
+      if(settingsIsActive) {
+        if(settingsCategoryId === 0) return;
       } else {
-        return component;
+        if(Object.keys(currentChat).length === 0) {
+          return;
+        } else {
+          return component;
+        }
       }
     } else {
       if(Object.keys(currentChat).length === 0) {
-        return <div className={styles.contentPlug} style={{height: blockHeight - 25}}><p>Select a chat to start messaging</p></div>;
+        return contentPlugBanner;
       } else {
-        return component;
+        if(settingsIsActive && settingsCategoryId === 0) return contentPlugBanner;
+        else return component; 
       }
     }
   }
@@ -108,9 +117,9 @@ const Content: React.FC<ContentI> = ({ mainDivRef }) => {
   return (
     <div className={styles.content} style={{opacity: modalWindowIsActive ? ".2" : ""}}>
       {sideMenu()}
-      {settingsIsActive ? <Categories /> : channelContent(<ChatInfo />)}
+      {settingsIsActive && settingsCategoryId !== 0 ? <Categories /> : settingsIsActive && settingsCategoryId === 0 ? channelContent(<Categories />) : channelContent(<ChatInfo />)}
     </div>
   )
-}
+})
 
 export default Content;

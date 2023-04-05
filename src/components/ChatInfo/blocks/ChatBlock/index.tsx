@@ -39,7 +39,7 @@ interface ChatBlockI {
   setSwitchToInfoCondition: Function;
 }
 
-const ChatBlock: React.FC<ChatBlockI> = ({choosedChat, currentChat, searchAnimationCondition, setSearchAnimationCondition, switchToInfoCondition, setSwitchToInfoCondition}) => {
+const ChatBlock: React.FC<ChatBlockI> = React.memo(({choosedChat, currentChat, searchAnimationCondition, setSearchAnimationCondition, switchToInfoCondition, setSwitchToInfoCondition}) => {
   const [filteredChannelPosts, setFilteredChannelPosts] = React.useState<any>([]);
   const [filteredSearchOutput, setFilteredSearchOutput] = React.useState<any>(); // <ContactChatInterface[] | PostInterface[]>
   const [chats, setChats] = React.useState<any>([]); // <ContactChatInterface[] | PostInterface[]>
@@ -268,6 +268,6 @@ const ChatBlock: React.FC<ChatBlockI> = ({choosedChat, currentChat, searchAnimat
       </div>
     </div>
   )
-}
+});
 
 export default ChatBlock;

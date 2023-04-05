@@ -16,7 +16,7 @@ interface SearchOutputI {
   searchFrom: string;
 }
 
-const SearchOutput: React.FC<SearchOutputI> = ({ searchFrom }) => {
+const SearchOutput: React.FC<SearchOutputI> = React.memo(({ searchFrom }) => {
   const [inputValue, setInputValue] = React.useState<string>("");
   const [globalSearchResultCount, setGlobalSearchResultCount] = React.useState<number>(6);
   const [filteredContactsAndChats, setFilteredContactsAndChats] = React.useState<any>([]); // ChannelInterface | ContactsInterface
@@ -177,6 +177,6 @@ const SearchOutput: React.FC<SearchOutputI> = ({ searchFrom }) => {
       {!filteredContactsAndChats.length && !filteredGlobalSearchResults.length && <i className={styles.notFound}><MdOutlineSearch/></i>}
     </div> 
   )
-}
+});
 
 export default SearchOutput;

@@ -20,7 +20,7 @@ interface InfoBlockI {
   setSwitchToInfoCondition: any;
 }
 
-const InfoBlock: React.FC<InfoBlockI> = ({choosedChat, currentChat, switchToInfoCondition, setSwitchToInfoCondition}) => {
+const InfoBlock: React.FC<InfoBlockI> = React.memo(({choosedChat, currentChat, switchToInfoCondition, setSwitchToInfoCondition}) => {
   const [currentMediaCategory, setCurrentMediaCategory] = React.useState<number>(1);
 
   const calculatedDate = useCalculateStatus((Date.now() - currentChat.lastActivity) / 1000);
@@ -170,6 +170,6 @@ const InfoBlock: React.FC<InfoBlockI> = ({choosedChat, currentChat, switchToInfo
       </div>
     </div>
   )
-}
+})
 
-export default InfoBlock
+export default InfoBlock;

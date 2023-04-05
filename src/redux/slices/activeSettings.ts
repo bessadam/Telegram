@@ -9,7 +9,7 @@ interface SettingsI {
 }
 
 const initialState: SettingsI = {
-  id: 1,
+  id: 0,
   isActive: false,
   currentSettings: {},
 }

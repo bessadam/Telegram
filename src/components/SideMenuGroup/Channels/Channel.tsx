@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./Channels.module.scss";
 //icons
-import { BiVolumeMute, BsCheck, BsCheckAll }  from '../../../assets/icons';
+import { BiVolumeMute, BsCheckAll }  from '../../../assets/icons';
 //interface
 import { ContactChatInterface } from "../../../types/Contacts";
 //redux
@@ -22,7 +22,7 @@ interface ChannelI {
   lastActivity: number;
 }
 
-const Channel: React.FC<ChannelI> = ({id, name, avatar, muted, surname, posts, lastActivity}) => {
+const Channel: React.FC<ChannelI> = React.memo(({id, name, avatar, muted, surname, posts, lastActivity}) => {
   const [calculatedDate, setCalculatedDate] = React.useState<string>("");
   const [currentChatId, setCurrentChatId] = React.useState<number>(0);
   const [lastPost, setLastPost] = React.useState<ContactChatInterface>();
@@ -107,12 +107,11 @@ const Channel: React.FC<ChannelI> = ({id, name, avatar, muted, surname, posts, l
           </div>
         </div>
         <div className={styles.info}>
-          {/* <img src="" alt="" /> */}
           <p className={styles.text}>{lastPost ? lastPost.text : "There are no messages yet."}</p>
         </div>
       </div>
     </div>
   )
-}
+});
 
 export default Channel;

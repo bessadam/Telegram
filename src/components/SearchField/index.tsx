@@ -7,6 +7,7 @@ import SearchInput from './SearchInput';
 import { FiEdit } from "../../assets/icons";
 //db
 import { dropMenuSearchItems } from "../../redux/db/dbDropMenuItems";
+//redux
 import { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 
@@ -14,7 +15,7 @@ interface SearchFieldI {
   searchFrom: string;
 }
 
-const SearchField: React.FC<SearchFieldI> = ({ searchFrom }) => {
+const SearchField: React.FC<SearchFieldI> = React.memo(({ searchFrom }) => {
   const [searchIsActive, setSearchIsActive] = React.useState<boolean>(false);
   //Chats search
   const chatsSearchIsActive = useSelector((state: RootState) => state.activeSearch.chatsSearch.isActive);
@@ -24,17 +25,17 @@ const SearchField: React.FC<SearchFieldI> = ({ searchFrom }) => {
   const channelInfoSearchIsActive = useSelector((state: RootState) => state.activeSearch.channelInfoSearch.isActive);
 
   React.useEffect(() => {
-    if(searchFrom==="Chats") {
+    if(searchFrom === "Chats") {
       searchIsActive && setSearchIsActive(false);
       chatsSearchIsActive && setSearchIsActive(true);
     }
 
-    if(searchFrom==="Contacts") {
+    if(searchFrom === "Contacts") {
       searchIsActive && setSearchIsActive(false);
       contactsSearchIsActive && setSearchIsActive(true);
     }
     
-    if(searchFrom==="ChatInfo") {
+    if(searchFrom === "ChatInfo") {
       searchIsActive && setSearchIsActive(false);
       channelInfoSearchIsActive && setSearchIsActive(true);
     }
@@ -46,6 +47,6 @@ const SearchField: React.FC<SearchFieldI> = ({ searchFrom }) => {
       { !searchIsActive && <DropMenu dropMenuItems={dropMenuSearchItems} menuIcon={<FiEdit />} /> }  
     </div>
   )
-}
+})
 
-export default SearchField
+export default SearchField;

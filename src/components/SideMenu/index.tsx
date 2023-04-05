@@ -29,7 +29,6 @@ const SideMenu: React.FC = () => {
     <div 
       className={styles.sideMenu} 
       style={{
-        // display: mainDivWidth < 600 ? setSwitchAnimation ? "block" : "none" : "block",
         display: mainDivWidth < 600 && sideMenuIsActive ? "block" : mainDivWidth < 600 ? sideMenuAnimation ? "block" : "none" : "block",
         transform: mainDivWidth < 600 ? sideMenuIsActive ? "" : "translateX(-150px)" : "",
         opacity: mainDivWidth < 600 ? sideMenuIsActive ? "1" : "0" : "1",

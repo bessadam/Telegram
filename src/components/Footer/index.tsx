@@ -9,6 +9,7 @@ import { setSideMenu } from "../../redux/slices/switchSideMenu";
 import { setSettingsActive } from "../../redux/slices/activeSettings";
 import { joinNewUserChannel, setChannelMuted } from "../../redux/slices/activeChats";
 import { setChatsSearchActive, setChatsSearchValue, setContactsSearchActive, setContactsSearchValue } from "../../redux/slices/activeSearch";
+import { setContactChatEmpty } from "../../redux/slices/activeContacts";
 
 const Footer: React.FC = () => {
   const [channelIsNew, setChannelIsNew] = React.useState<boolean>(false);
@@ -17,6 +18,7 @@ const Footer: React.FC = () => {
   const currentSideMenuCategory = useSelector((state: RootState) => state.activeSideMenu.currentSideMenuCategory);
   const {currentChannel, userChannels, chatInfoIsActive} = useSelector((state: RootState) => state.activeChats);
   const activeContactChat = useSelector((state: RootState) => state.activeContacts.activeContactChat);
+  const settingsCategoryId = useSelector((state: RootState) => state.activeSettings.id);
 
   //channels and contacts download status 
   const channelsStatus = useSelector((state: RootState) => state.activeChats.status);
@@ -42,16 +44,16 @@ const Footer: React.FC = () => {
       dispatch(setSideMenu({id})); 
       settingsIsActive 
         && id!==4 
-        && dispatch(setSettingsActive({isActive: false, id: 0})); // Need to disable Settings to not show Settings content in Chats component
+        && dispatch(setSettingsActive({isActive: false, id: settingsCategoryId === 0 ? 0 : settingsCategoryId})); // Need to disable Settings to not show Settings content in Chats component
       id === 1 && dispatch(setContactsSearchActive({active: false})) && dispatch(setContactsSearchValue({searchValue: ""})); // Disable and clear Search from Contacts
       id === 3 && dispatch(setChatsSearchActive({active: false})) && dispatch(setChatsSearchValue({searchValue: ""})); // Disable and clear Search from SideMenu
-      id === 4 && dispatch(setSettingsActive({isActive: true, id: 1})); // Switch control group to Settings component
+      id === 4 && dispatch(setSettingsActive({isActive: true, id: settingsCategoryId === 0 ? 0 : settingsCategoryId})); // Switch control group to Settings component
     }
   }
   
   const channelFooterAction = () => {
     channelIsNew 
-      ? dispatch(joinNewUserChannel({newChannel: currentChannel}))
+      ? dispatch(joinNewUserChannel({newChannel: currentChannel})) && dispatch(setContactChatEmpty({}))
       : dispatch(setChannelMuted({active: !currentChannel?.muted}))
   }
 
@@ -102,7 +104,7 @@ const Footer: React.FC = () => {
 
   return (
     <>
-      {settingsIsActive && mainDivWidth < 600 ? "" : <div className={styles.footer} style={{opacity: modalWindowIsActive ? ".2" : ""}}>
+      {settingsCategoryId !== 0 && settingsIsActive && mainDivWidth < 600 ? "" : <div className={styles.footer} style={{opacity: modalWindowIsActive ? ".2" : ""}}>
         {controlGroupField(<div className={styles.controlPanel} style={{width: mainDivWidth < 600 ? "100%" : "unset", maxWidth: mainDivWidth < 600 ? "unset" : ""}}>
           {controlGroup.map((item) => {
             return <i 

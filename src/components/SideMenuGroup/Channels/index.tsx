@@ -33,9 +33,11 @@ const Channels: React.FC = () => {
     <div className={styles.channels}>
       <SearchField searchFrom="Chats" />
       { orderedChannels.length 
-        ? !searchIsActive ? orderedChannels.map((item: any) => {
-          return <Channel {...item} key={item.id + item.name} />
-        }) : <SearchOutput searchFrom="Chats" /> 
+        ? !searchIsActive 
+          ? orderedChannels.map((item: any) => {
+            return <Channel {...item} key={item.id + item.name} />
+          }) 
+          : <SearchOutput searchFrom="Chats" /> 
         : [...Array(7)].map((_, key) => {
           return <ChannelSkeleton key={key} />
         })

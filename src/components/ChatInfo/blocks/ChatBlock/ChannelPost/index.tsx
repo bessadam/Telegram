@@ -12,7 +12,7 @@ interface ChannelPostI {
   avatar: string;
 }
 
-const ChannelPost: React.FC<ChannelPostI> = ({text, time, media, views, name, avatar}) => {
+const ChannelPost: React.FC<ChannelPostI> = React.memo(({text, time, media, views, name, avatar}) => {
   const [shareBtnActive, setShareBtnActive] = React.useState<boolean>(false);
   const dateStandart = new Date(time);
   const postDay = dateStandart.getDate() + " " +  dateStandart.toLocaleDateString('en-us', {month:"long"});
@@ -55,6 +55,6 @@ const ChannelPost: React.FC<ChannelPostI> = ({text, time, media, views, name, av
       </div>
     </div>
   )
-}
+});
 
-export default ChannelPost
+export default ChannelPost;

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice }  from "@reduxjs/toolkit";
 //interface
-import { ContactsInterface, ContactContactsInterface, ContactChatInterface } from "../../types/Contacts";
+import { ContactsInterface, ContactContactsInterface } from "../../types/Contacts";
 import { UserInterface } from "../../types/User";
 
 export const fetchContacts = createAsyncThunk(

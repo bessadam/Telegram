@@ -18,7 +18,7 @@ interface SearchInputI {
   searchFrom: string;
 }
 
-const SearchInput: React.FC<SearchInputI> = ({ searchFrom }) => {
+const SearchInput: React.FC<SearchInputI> = React.memo(({ searchFrom }) => {
   const [inputValue, setInputValue] = React.useState<string>("");
   const [searchIsActive, setSearchIsActive] = React.useState<boolean>(false);
 
@@ -189,6 +189,6 @@ const SearchInput: React.FC<SearchInputI> = ({ searchFrom }) => {
       </i> 
     </div>
   )
-}
+});
 
-export default SearchInput
+export default SearchInput;
