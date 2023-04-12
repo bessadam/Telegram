@@ -11,20 +11,43 @@ import { addNewContactToLoggedUser, addNewContactToOtherUser } from "../../redux
 const ModalWindow: React.FC = () => {
   const [firstName, setFirstName] = React.useState<string>("");
   const [lastName, setLastName] = React.useState<string>("");
+  
+  //animation
+  const [modalWindowCondition, setModalWindowCondition] = React.useState<boolean>(false);
 
-  const firstNameRef = React.useRef<HTMLInputElement>(null);
-
-  //error label
+  //error labels
   const [errorLabelText, setErrorLabelText] = React.useState<string>("");
   const [errorLabelActive, setErrorLabelActive] = React.useState<boolean>(false);
+
+  const firstNameRef = React.useRef<HTMLInputElement>(null);
+  const modalRef = React.useRef<HTMLDivElement>(null);
 
   const modalWindowIsActive = useSelector((state: RootState) => state.activeModalWindow.isActive);
   const users = useSelector((state: RootState) => state.activeContacts.users);
   const contacts = useSelector((state: RootState) => state.activeContacts.contacts);
 
   const dispatch = useDispatch();
-  //animation
-  const [modalWindowCondition, setModalWindowCondition] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      const path = e.composedPath ? e.composedPath() : e.path;
+      if (!path.includes(modalRef.current)) {
+        setModalWindowCondition(false);
+        setErrorLabelActive(false);
+        setFirstName("");
+        setLastName("");
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if(!modalWindowCondition) dispatch(setModalWindowActive({active: false}));
+  }, [modalWindowCondition]);
 
   React.useEffect(() => {
     if(modalWindowIsActive) {
@@ -53,14 +76,14 @@ const ModalWindow: React.FC = () => {
   
         if(user===undefined) {
           setErrorLabelActive(true);
-          setErrorLabelText("No matches");
+          setErrorLabelText("No such users found");
         }
       }
     }
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if(e.key==="Enter") {
+    if(e.key === "Enter") {
       searchUser();
     }
   }
@@ -74,7 +97,7 @@ const ModalWindow: React.FC = () => {
   }
 
   return (
-    <div className={styles.modalWindow} style={{display: modalWindowIsActive ? "" : "none"}}>
+    <div className={styles.modalWindow} ref={modalRef} style={{display: modalWindowIsActive ? "" : "none"}}>
       <div 
         className={styles.header}
         style={{
@@ -96,7 +119,7 @@ const ModalWindow: React.FC = () => {
               placeholder="First Name" 
               value={firstName} 
               onChange={e => setFirstName(e.target.value)} 
-              onKeyDown={(e: any) => handleKeyDown(e)} 
+              onKeyDown={(e: any) => handleKeyDown(e)}
               ref={firstNameRef}
             />
           </div>
@@ -106,6 +129,7 @@ const ModalWindow: React.FC = () => {
               placeholder="Last Name" 
               value={lastName} 
               onChange={e => setLastName(e.target.value)} 
+              onKeyDown={(e: any) => handleKeyDown(e)}
             />
           </div>
           {errorLabelActive && <div className={styles.errorLabel}>
@@ -120,7 +144,7 @@ const ModalWindow: React.FC = () => {
         }}
         onClick={searchUser}
       >
-        <p>OK</p>
+        <p>Apply</p>
       </div>
     </div>
   )

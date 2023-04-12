@@ -24,16 +24,18 @@ const DropMenu: React.FC<DropMenuInterface> = React.memo(({ menuIcon, dropMenuIt
   const dispatch = useDispatch();  
 
   React.useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      const path = e.composedPath ? e.composedPath() : e.path;
-      if (!path.includes(dropMenuRef.current)) {
-        setDropMenuIsActive(false);
+    if(dropMenuIsActive) {
+      const handleClickOutside = (e: any) => {
+        const path = e.composedPath ? e.composedPath() : e.path;
+        if (!path.includes(dropMenuRef.current)) {
+          setDropMenuIsActive(false);
+        }
+      };
+      document.addEventListener("click", handleClickOutside);
+  
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
       }
-    };
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
     }
   }, [dropMenuIsActive]);
 
